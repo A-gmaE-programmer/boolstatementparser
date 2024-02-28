@@ -9,31 +9,46 @@ TODO: implement an interpreter that supports order of operations
 
 # Using as a library
 ```python
-import truthTable
+import boolparser
 
 # operations is a dictionary that maps
 # all boolean operations that take 2 inputs
 # to a lambda function
-truthTable.operations["AND"](True, True) # True
+boolparser.operations["AND"](True, True) # True
+
+# brackets take highest precedence,
+# After that not statements, then the following
+# Ordered list of lists in order
+# Operations will be evaluated in this order
+operation_order = \
+[
+        [ "AND", "NAND" ],
+        [ "OR", "NOR" ],
+        [ "XOR", "XNOR" ],
+]
+
+# Parse a string into a boolean statement
+statment = parseStmt("A AND NOT C XOR A")
 
 # extract all the inputs from a boolean statement
-# statement is just a string that has been split
 # inputs can be used multiple times
 # A dictionary is returned with all inputs as False
-statement = "A AND NOT C XOR A".split()
-inputs = truthTable.initInput(statement)
+inputs = boolparser.getInputs(statement)
 # {'A': False, 'C': False}
 
-# Evaluate a boolean statement
+# Evaluate a boolean statement left to right
 # takes in a dictionary of input values
-statement = "A AND (B NOR C) XOR A".split()
+statement = parseStmt("A AND (B NOR C) XOR A")
 inputs = {'A': False, 'B': True, 'C': False}
-truthTable.evalStmt(statement, inputs) # False
+boolparser.evalStmtLR(statement, inputs) # False
+
+# Evaluate a boolean statement based on operation_order
+boolparser.evalStmtOO(statement, inputs)
 
 # Generate a parse table as a 2d list of values
 # Takes in boolean statement
-pt = truthTable.generateParseTable(statement)
+pt = boolparser.generateParseTable(statement)
 
 # Pretty print the parse table
-truthTable.printFormatParseTable(pt, inputs)
+boolparser.printFormatParseTable(pt, inputs)
 ```
