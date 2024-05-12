@@ -14,7 +14,7 @@ if __name__ == "__main__":
     else:
         print("Defaults: \n\
     debug: False\n\
-    makeTake: True\n\
+    makeTable: True\n\
     evalMode: Order of operations\n")
     mainStatement = parseStmt(input("Boolean Statement > "))
     inputs = getInputs(mainStatement)

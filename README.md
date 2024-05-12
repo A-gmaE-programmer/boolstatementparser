@@ -2,10 +2,9 @@
 To run
 `python truthTable.py`
 
-Boolean statement is parsed from left to right, prioritising statements in backets and not inversions
+Boolean can be evaluated from left to right or based on the order of operations
+Statements in backets are prioritsed as well as NOT operations
 Supports `AND`, `NAND`, `OR`, `NOR`, `XOR`, `NOT`
-
-TODO: implement an interpreter that supports order of operations
 
 # Using as a library
 ```python
